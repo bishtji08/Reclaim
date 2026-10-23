@@ -223,7 +223,7 @@ export const AnalyticsDashboard: React.FC = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-200">
+    <div className="p-3.5 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6 sm:space-y-8 animate-in fade-in duration-200">
       
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-slate-200/80">
@@ -235,7 +235,7 @@ export const AnalyticsDashboard: React.FC = () => {
             <span className="text-xs text-slate-400 font-semibold">•</span>
             <span className="text-xs text-slate-500 font-bold">Graphic Era University</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
+          <h1 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
             Campus Analytics & Live Telemetry
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
@@ -246,7 +246,7 @@ export const AnalyticsDashboard: React.FC = () => {
         <div className="flex items-center gap-2.5 self-start sm:self-auto">
           <button
             onClick={fetchAllData}
-            className="inline-flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 bg-white hover:bg-slate-50 shadow-xs transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 bg-white hover:bg-slate-50 shadow-xs transition-all cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" /> Refresh Telemetry
           </button>
@@ -254,48 +254,48 @@ export const AnalyticsDashboard: React.FC = () => {
       </div>
 
       {/* Mode Navigation Tabs */}
-      <div className="flex items-center gap-2 p-1.5 bg-slate-100 rounded-2xl w-fit border border-slate-200/80">
+      <div className="w-full sm:w-fit grid grid-cols-2 sm:flex items-center gap-1 sm:gap-2 p-1 sm:p-1.5 bg-slate-100 rounded-2xl border border-slate-200/80">
         <button
           onClick={() => setActiveTab('visitors')}
-          className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black transition-all cursor-pointer ${
+          className={`flex items-center justify-center gap-1.5 sm:gap-2 py-2 sm:py-2.5 px-2.5 sm:px-5 rounded-xl text-[11px] sm:text-xs font-black transition-all cursor-pointer ${
             activeTab === 'visitors'
               ? 'bg-white text-blue-700 shadow-xs border border-slate-200/80'
               : 'text-slate-600 hover:text-slate-900'
           }`}
         >
-          <Activity className="w-4 h-4 text-emerald-500" />
-          <span>Visitor Traffic & Live Telemetry</span>
+          <Activity className="w-4 h-4 text-emerald-500 shrink-0" />
+          <span className="truncate">Visitor Traffic</span>
           {liveActive > 0 && (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-700">
-              {liveActive} Live
+            <span className="inline-flex items-center px-1.5 sm:px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black bg-emerald-100 text-emerald-700 shrink-0">
+              {liveActive}
             </span>
           )}
         </button>
 
         <button
           onClick={() => setActiveTab('assets')}
-          className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black transition-all cursor-pointer ${
+          className={`flex items-center justify-center gap-1.5 sm:gap-2 py-2 sm:py-2.5 px-2.5 sm:px-5 rounded-xl text-[11px] sm:text-xs font-black transition-all cursor-pointer ${
             activeTab === 'assets'
               ? 'bg-white text-blue-700 shadow-xs border border-slate-200/80'
               : 'text-slate-600 hover:text-slate-900'
           }`}
         >
-          <BarChart2 className="w-4 h-4 text-blue-600" />
-          <span>Asset Recovery & Cases</span>
+          <BarChart2 className="w-4 h-4 text-blue-600 shrink-0" />
+          <span className="truncate">Asset Recovery</span>
         </button>
       </div>
 
       {activeTab === 'visitors' ? (
-        <div className="space-y-8 animate-in fade-in duration-150">
+        <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-150">
           
           {/* Live Beacon Banner */}
-          <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 rounded-2xl sm:rounded-3xl p-4.5 sm:p-6 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row md:items-center md:justify-between gap-5 sm:gap-6">
             <div className="space-y-2 z-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold">
+              <div className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[10px] sm:text-xs font-bold">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
                 <span>REAL-TIME TELEMETRY ENGINE</span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white">
+              <h2 className="text-lg sm:text-2xl font-black tracking-tight text-white">
                 {liveActive} Active Visitor{liveActive !== 1 ? 's' : ''} Online Right Now
               </h2>
               <p className="text-xs sm:text-sm text-slate-300 max-w-xl font-medium">
@@ -303,40 +303,40 @@ export const AnalyticsDashboard: React.FC = () => {
               </p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10 text-xs space-y-2 max-w-sm z-10">
-              <div className="flex items-center gap-2 font-black text-amber-300">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 sm:p-4 border border-white/10 text-xs space-y-1.5 sm:space-y-2 max-w-sm z-10">
+              <div className="flex items-center gap-2 font-black text-amber-300 text-xs">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 <span>Privacy By Design Guarantee</span>
               </div>
-              <p className="text-slate-300 text-[11px] leading-relaxed">
+              <p className="text-slate-300 text-[10px] sm:text-[11px] leading-relaxed">
                 Zero IP addresses, cookies, names, emails, or hardware fingerprints are recorded. 100% compliant with privacy principles.
               </p>
             </div>
           </div>
 
           {/* Visitor KPI Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5">
             {visitorStatCards.map((card, idx) => {
               const Icon = card.icon;
               return (
                 <div
                   key={idx}
-                  className={`bg-white rounded-3xl p-5 sm:p-6 shadow-xs border ${card.border} hover:shadow-md transition-all flex items-center justify-between group`}
+                  className={`bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 shadow-xs border ${card.border} hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-2 group`}
                 >
                   <div>
-                    <div className="flex items-center gap-2">
-                      <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{card.title}</p>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 line-clamp-1">{card.title}</p>
                       {card.badge && (
-                        <span className="px-2 py-0.5 text-[9px] font-black uppercase rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <span className="px-1.5 sm:px-2 py-0.2 sm:py-0.5 text-[8px] sm:text-[9px] font-black uppercase rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
                           {card.badge}
                         </span>
                       )}
                     </div>
-                    <p className="text-2xl sm:text-3xl font-black text-slate-900 mt-1">{card.value}</p>
-                    <p className="text-[11px] text-slate-500 font-medium mt-0.5">{card.sub}</p>
+                    <p className="text-xl sm:text-3xl font-black text-slate-900 mt-1">{card.value}</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5 truncate">{card.sub}</p>
                   </div>
-                  <div className={`p-3.5 rounded-2xl ${card.bg} group-hover:scale-110 transition-transform`}>
-                    <Icon className="w-6 h-6 stroke-[2.25]" />
+                  <div className={`p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl ${card.bg} group-hover:scale-105 transition-transform self-start sm:self-center shrink-0`}>
+                    <Icon className="w-4 h-4 sm:w-6 sm:h-6 stroke-[2.25]" />
                   </div>
                 </div>
               );
@@ -621,21 +621,21 @@ export const AnalyticsDashboard: React.FC = () => {
         <div className="space-y-8 animate-in fade-in duration-150">
           
           {/* Asset KPI Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5">
             {assetStatCards.map((card, idx) => {
               const Icon = card.icon;
               return (
                 <div
                   key={idx}
-                  className={`bg-white rounded-3xl p-5 sm:p-6 shadow-xs border ${card.border} hover:shadow-md transition-all flex items-center justify-between group`}
+                  className={`bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 shadow-xs border ${card.border} hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-2 group`}
                 >
                   <div>
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{card.title}</p>
-                    <p className="text-2xl sm:text-3xl font-black text-slate-900 mt-1">{card.value}</p>
-                    <p className="text-[11px] text-slate-500 font-medium mt-0.5">{card.sub}</p>
+                    <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 line-clamp-1">{card.title}</p>
+                    <p className="text-xl sm:text-3xl font-black text-slate-900 mt-1">{card.value}</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5 truncate">{card.sub}</p>
                   </div>
-                  <div className={`p-3.5 rounded-2xl ${card.bg} group-hover:scale-110 transition-transform`}>
-                    <Icon className="w-6 h-6 stroke-[2.25]" />
+                  <div className={`p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl ${card.bg} group-hover:scale-105 transition-transform self-start sm:self-center shrink-0`}>
+                    <Icon className="w-4 h-4 sm:w-6 sm:h-6 stroke-[2.25]" />
                   </div>
                 </div>
               );

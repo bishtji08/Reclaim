@@ -140,41 +140,41 @@ export const ItemModal: React.FC<ItemModalProps> = ({ item, onClose, onClaimSucc
   };
 
   return (
-    <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 z-50 animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-slate-100 flex flex-col">
+    <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-4 z-50 animate-in fade-in duration-200">
+      <div className="bg-white rounded-t-3xl sm:rounded-3xl max-w-4xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 flex flex-col pb-safe">
 
         {/* Header Bar */}
-        <div className="flex items-start justify-between p-5 sm:p-6 border-b border-slate-100 sticky top-0 bg-white/95 backdrop-blur-md z-10">
+        <div className="flex items-start justify-between p-4 sm:p-6 border-b border-slate-100 sticky top-0 bg-white/95 backdrop-blur-md z-10">
           <div>
-            <div className="flex items-center gap-2 mb-2 flex-wrap">
-              <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${item.type === 'lost'
+            <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2 flex-wrap">
+              <span className={`px-2 sm:px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-wider ${item.type === 'lost'
                 ? 'bg-rose-50 text-rose-700 border border-rose-200'
                 : 'bg-sky-50 text-sky-700 border border-sky-200'
                 }`}>
                 {item.type} Item
               </span>
 
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200 capitalize">
+              <span className="px-2 sm:px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200 capitalize">
                 Status: {item.status}
               </span>
 
               {item.isUrgent && (
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-amber-500 to-orange-500 text-white flex items-center gap-1 shadow-xs">
+                <span className="px-2 sm:px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black bg-gradient-to-r from-amber-500 to-orange-500 text-white flex items-center gap-1 shadow-xs">
                   <AlertTriangle className="w-3 h-3" /> Urgent Priority
                 </span>
               )}
 
               {item.is_suspicious && (
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-500 text-white flex items-center gap-1 shadow-xs">
+                <span className="px-2 sm:px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black bg-rose-500 text-white flex items-center gap-1 shadow-xs">
                   <Flag className="w-3 h-3" /> Under Moderation
                 </span>
               )}
             </div>
 
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">{item.title}</h2>
+            <h2 className="text-lg sm:text-2xl font-black text-slate-900 tracking-tight leading-snug">{item.title}</h2>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0 ml-2">
             <button
               onClick={() => {
                 if (!user) {
@@ -183,24 +183,24 @@ export const ItemModal: React.FC<ItemModalProps> = ({ item, onClose, onClaimSucc
                 }
                 setShowFlagModal(true);
               }}
-              className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-2xl transition-colors cursor-pointer"
+              className="p-1.5 sm:p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl sm:rounded-2xl transition-colors cursor-pointer"
               title="Flag as Suspicious / Inappropriate"
             >
-              <Flag className="w-5 h-5" />
+              <Flag className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
             <button
               onClick={onClose}
-              className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-2xl transition-colors cursor-pointer"
+              className="p-1.5 sm:p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl sm:rounded-2xl transition-colors cursor-pointer"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           </div>
         </div>
 
         {/* Suspicious Listing Banner */}
         {item.is_suspicious && (
-          <div className="mx-6 mt-4 p-4 bg-rose-50 border border-rose-200 rounded-2xl flex items-center gap-3 text-rose-800 text-xs font-medium">
-            <AlertTriangle className="w-5 h-5 flex-shrink-0 text-rose-600" />
+          <div className="mx-4 sm:mx-6 mt-3 sm:mt-4 p-3.5 sm:p-4 bg-rose-50 border border-rose-200 rounded-2xl flex items-center gap-3 text-rose-800 text-xs font-medium">
+            <AlertTriangle className="w-5 h-5 shrink-0 text-rose-600" />
             <div>
               <strong>Campus Safety Notice:</strong> This listing has been flagged by community members as potentially suspicious or inaccurate and is currently undergoing administrative moderation.
             </div>
@@ -208,12 +208,12 @@ export const ItemModal: React.FC<ItemModalProps> = ({ item, onClose, onClaimSucc
         )}
 
         {/* Modal Body */}
-        <div className="p-5 sm:p-6 space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="p-4 sm:p-6 space-y-5 sm:space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
 
             {/* Gallery Column */}
             <div className="space-y-3">
-              <div className="relative h-72 sm:h-80 bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 flex items-center justify-center">
+              <div className="relative h-56 sm:h-80 bg-slate-900 rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 flex items-center justify-center">
                 {images.length > 0 ? (
                   <img
                     src={images[currentImageIndex]}
@@ -429,14 +429,14 @@ export const ItemModal: React.FC<ItemModalProps> = ({ item, onClose, onClaimSucc
 
       {/* Claim Drawer / Form Modal */}
       {showClaimForm && (
-        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 z-60 animate-in fade-in duration-150">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-5 shadow-2xl border border-slate-100">
+        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 z-60 animate-in fade-in duration-150">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-8 space-y-4 sm:space-y-5 shadow-2xl border border-slate-100 max-h-[92vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div>
-                <h3 className="text-lg font-black text-slate-900">Submit Ownership Claim</h3>
+                <h3 className="text-base sm:text-lg font-black text-slate-900">Submit Ownership Claim</h3>
                 <p className="text-xs text-slate-500 mt-0.5">Verification for: <span className="font-bold text-slate-800">{item.title}</span></p>
               </div>
-              <button onClick={() => setShowClaimForm(false)} className="text-slate-400 hover:text-slate-600">
+              <button onClick={() => setShowClaimForm(false)} className="text-slate-400 hover:text-slate-600 p-1">
                 <X className="w-5 h-5" />
               </button>
             </div>

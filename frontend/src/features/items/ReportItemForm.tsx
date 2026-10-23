@@ -384,14 +384,14 @@ export const ReportItemForm: React.FC<ReportItemFormProps> = ({ type, onSubmit, 
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl shadow-xl border border-slate-200/90 overflow-hidden">
+    <div className="max-w-4xl mx-auto p-3.5 sm:p-6 lg:p-8 animate-in fade-in duration-200">
+      <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200/90 overflow-hidden">
         
         {/* Header with Graphic Era University Styling */}
-        <div className="p-6 sm:p-8 bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 text-white relative">
+        <div className="p-4.5 sm:p-8 bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 text-white relative">
           <div className="flex items-center justify-between">
             <div className="space-y-2">
-              <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${
+              <span className={`inline-block px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-wider ${
                 type === 'lost' 
                   ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' 
                   : 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
@@ -399,7 +399,7 @@ export const ReportItemForm: React.FC<ReportItemFormProps> = ({ type, onSubmit, 
                 {type === 'lost' ? 'Lost Property Filing' : 'Discovered Asset Log'}
               </span>
 
-              <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
+              <h2 className="text-xl sm:text-3xl font-black tracking-tight">
                 Report {type === 'lost' ? 'Lost' : 'Found'} Item
               </h2>
 
@@ -410,7 +410,7 @@ export const ReportItemForm: React.FC<ReportItemFormProps> = ({ type, onSubmit, 
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-8 text-xs sm:text-sm">
+        <form onSubmit={handleSubmit} className="p-4.5 sm:p-8 space-y-6 sm:space-y-8 text-xs sm:text-sm">
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
@@ -747,22 +747,22 @@ export const ReportItemForm: React.FC<ReportItemFormProps> = ({ type, onSubmit, 
           </div>
 
           {/* Form Actions */}
-          <div className="pt-6 border-t border-slate-100 flex items-center justify-end gap-3">
+          <div className="pt-6 border-t border-slate-100 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 sm:gap-3">
             <button
               type="button"
               onClick={onCancel}
-              className="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-100 transition-colors cursor-pointer"
+              className="w-full sm:w-auto px-5 py-3 sm:py-2.5 rounded-xl border border-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-100 transition-colors cursor-pointer text-center"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-extrabold text-xs text-white shadow-md transition-all cursor-pointer ${
+              className={`w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 sm:py-2.5 rounded-xl font-extrabold text-xs text-white shadow-md transition-all cursor-pointer ${
                 type === 'lost'
                   ? 'bg-rose-600 hover:bg-rose-700 shadow-rose-600/25'
                   : 'bg-blue-600 hover:bg-blue-700 shadow-blue-600/25'
-              } ${loading ? 'opacity-60 cursor-not-allowed' : 'hover:-translate-y-0.5'}`}
+              } ${loading ? 'opacity-60 cursor-not-allowed' : 'hover:-translate-y-0.5 active:scale-98'}`}
             >
               {loading && <Loader2 className="w-4 h-4 animate-spin" />}
               {loading ? 'Publishing Report...' : `Submit ${type === 'lost' ? 'Lost' : 'Found'} Item Report`}

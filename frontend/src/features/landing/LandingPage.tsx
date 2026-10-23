@@ -160,26 +160,26 @@ export const LandingPage: React.FC<LandingPageProps> = ({
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-blue-600 selection:text-white">
       {/* 1. TOP NAVBAR */}
       <nav className="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 text-white transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+        <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Brand Logo & University Title */}
-            <div className="flex items-center gap-3.5 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-amber-400 p-0.5 shadow-lg shadow-blue-500/20 flex items-center justify-center">
-                <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-                  <Search className="w-5 h-5 text-blue-400 stroke-[2.5]" />
+            <div className="flex items-center gap-2.5 sm:gap-3.5 cursor-pointer shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-amber-400 p-0.5 shadow-lg shadow-blue-500/20 flex items-center justify-center shrink-0">
+                <div className="w-full h-full bg-slate-950 rounded-[13px] sm:rounded-[14px] flex items-center justify-center">
+                  <Search className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 stroke-[2.5]" />
                 </div>
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xl font-black tracking-tight text-white">
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="text-lg sm:text-xl font-black tracking-tight text-white leading-none">
                     RE<span className="text-blue-500">claim</span>
                   </span>
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full">
-                    GEU Campus
+                  <span className="px-1.5 sm:px-2 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full">
+                    GEU
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-400 font-medium tracking-wide">
-                  Graphic Era University • Dehradun
+                <p className="text-[10px] sm:text-[11px] text-slate-400 font-medium tracking-wide truncate max-w-[130px] sm:max-w-none mt-0.5">
+                  Graphic Era University
                 </p>
               </div>
             </div>
@@ -194,12 +194,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
 
             {/* Right Action Buttons */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               {user ? (
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3">
                   <button
                     onClick={() => onNavigateTab('dashboard')}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-md shadow-blue-600/30 transition-all cursor-pointer"
+                    className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-md shadow-blue-600/30 transition-all cursor-pointer whitespace-nowrap"
                   >
                     <LayoutDashboard className="w-4 h-4" /> Go to Portal
                   </button>
@@ -213,18 +213,19 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   )}
                 </div>
               ) : (
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-1.5 sm:gap-2.5">
                   <button
                     onClick={() => onOpenAuth('login')}
-                    className="px-4 py-2 rounded-xl text-xs font-bold text-slate-200 hover:text-white hover:bg-slate-800/80 transition-all border border-slate-700/60 cursor-pointer"
+                    className="px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold text-slate-200 hover:text-white hover:bg-slate-800/80 transition-all border border-slate-700/60 cursor-pointer whitespace-nowrap"
                   >
                     Sign In
                   </button>
                   <button
                     onClick={() => onOpenAuth('register')}
-                    className="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-md shadow-blue-600/25 transition-all cursor-pointer"
+                    className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-md shadow-blue-600/25 transition-all cursor-pointer whitespace-nowrap"
                   >
-                    Create Account
+                    <span className="hidden sm:inline">Create Account</span>
+                    <span className="sm:hidden">Join</span>
                   </button>
                 </div>
               )}
@@ -267,32 +268,32 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           {/* Headings */}
-          <div className="space-y-4">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15]">
+          <div className="space-y-3 sm:space-y-4">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15]">
               Lost Something on Campus?{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-amber-300">
                 REclaim It.
               </span>
             </h1>
-            <p className="text-lg sm:text-xl font-bold text-blue-100/90 max-w-3xl mx-auto tracking-wide">
+            <p className="text-base sm:text-xl font-bold text-blue-100/90 max-w-3xl mx-auto tracking-wide">
               The Campus Lost & Found Platform for Graphic Era University.
             </p>
-            <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
+            <p className="text-xs sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
               Centralized, database-driven belongings recovery serving students, faculty, and campus security across all academic blocks, libraries, and laboratories at GEU Dehradun.
             </p>
           </div>
 
           {/* Prominent CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 pt-2">
             <button
               onClick={() => handleReportAction('lost')}
-              className="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white text-sm font-bold shadow-lg shadow-rose-600/30 transition-all transform hover:-translate-y-0.5 cursor-pointer"
+              className="flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white text-xs sm:text-sm font-bold shadow-lg shadow-rose-600/30 transition-all transform hover:-translate-y-0.5 active:scale-98 cursor-pointer"
             >
               <FileText className="w-4 h-4" /> Report Lost Item
             </button>
             <button
               onClick={() => handleReportAction('found')}
-              className="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold shadow-lg shadow-emerald-600/30 transition-all transform hover:-translate-y-0.5 cursor-pointer"
+              className="flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold shadow-lg shadow-emerald-600/30 transition-all transform hover:-translate-y-0.5 active:scale-98 cursor-pointer"
             >
               <PlusCircle className="w-4 h-4" /> Report Found Item
             </button>
@@ -301,9 +302,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 const el = document.getElementById('recent-items');
                 el?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 hover:text-white text-sm font-bold border border-slate-700/80 shadow-md backdrop-blur-md transition-all cursor-pointer"
+              className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 hover:text-white text-xs sm:text-sm font-bold border border-slate-700/80 shadow-md backdrop-blur-md transition-all active:scale-98 cursor-pointer"
             >
-              Browse Campus Directory <ArrowRight className="w-4 h-4" />
+              Browse Directory <ArrowRight className="w-4 h-4" />
             </button>
           </div>
 

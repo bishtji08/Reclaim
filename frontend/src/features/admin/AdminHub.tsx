@@ -242,24 +242,24 @@ export const AdminHub: React.FC<AdminHubProps> = ({ currentUser }) => {
   });
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
+    <div className="p-3.5 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6 animate-in fade-in duration-200">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-gradient-to-r from-slate-900 to-indigo-950 p-6 rounded-3xl text-white shadow-xl">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-gradient-to-r from-slate-900 to-indigo-950 p-4.5 sm:p-6 rounded-2xl sm:rounded-3xl text-white shadow-xl">
         <div>
           <div className="flex items-center gap-2 mb-2">
             <span className="px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-full text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
               <ShieldAlert className="w-3.5 h-3.5" /> Administrative Controls
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+          <h1 className="text-xl sm:text-3xl font-extrabold tracking-tight">
             Moderation & System Governance
           </h1>
-          <p className="text-slate-300 text-sm mt-1 max-w-xl">
+          <p className="text-slate-300 text-xs sm:text-sm mt-1 max-w-xl">
             Manage controlled categories, enforce user conduct rules, blacklist offending accounts, and review suspicious item flags.
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 self-start sm:self-auto">
           <button
             onClick={() => {
               if (activeTab === 'categories') fetchCategories();
@@ -289,10 +289,10 @@ export const AdminHub: React.FC<AdminHubProps> = ({ currentUser }) => {
       )}
 
       {/* Tabs */}
-      <div className="flex border-b border-gray-200 space-x-8">
+      <div className="flex border-b border-gray-200 overflow-x-auto no-scrollbar space-x-4 sm:space-x-8 whitespace-nowrap pb-1">
         <button
           onClick={() => setActiveTab('categories')}
-          className={`pb-4 text-sm font-semibold flex items-center gap-2 border-b-2 transition-all ${
+          className={`pb-3 text-xs sm:text-sm font-semibold flex items-center gap-2 border-b-2 transition-all shrink-0 cursor-pointer ${
             activeTab === 'categories'
               ? 'border-blue-600 text-blue-600'
               : 'border-transparent text-gray-500 hover:text-gray-900'
@@ -303,7 +303,7 @@ export const AdminHub: React.FC<AdminHubProps> = ({ currentUser }) => {
 
         <button
           onClick={() => setActiveTab('users')}
-          className={`pb-4 text-sm font-semibold flex items-center gap-2 border-b-2 transition-all ${
+          className={`pb-3 text-xs sm:text-sm font-semibold flex items-center gap-2 border-b-2 transition-all shrink-0 cursor-pointer ${
             activeTab === 'users'
               ? 'border-blue-600 text-blue-600'
               : 'border-transparent text-gray-500 hover:text-gray-900'
@@ -314,7 +314,7 @@ export const AdminHub: React.FC<AdminHubProps> = ({ currentUser }) => {
 
         <button
           onClick={() => setActiveTab('flags')}
-          className={`pb-4 text-sm font-semibold flex items-center gap-2 border-b-2 transition-all ${
+          className={`pb-3 text-xs sm:text-sm font-semibold flex items-center gap-2 border-b-2 transition-all shrink-0 cursor-pointer ${
             activeTab === 'flags'
               ? 'border-blue-600 text-blue-600'
               : 'border-transparent text-gray-500 hover:text-gray-900'
@@ -431,7 +431,8 @@ export const AdminHub: React.FC<AdminHubProps> = ({ currentUser }) => {
           </div>
 
           <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs">
-            <div className="overflow-x-auto">
+            {/* Desktop Table View */}
+            <div className="hidden sm:block overflow-x-auto">
               <table className="w-full text-left text-xs text-gray-600">
                 <thead className="bg-gray-50 border-b border-gray-200 text-gray-700 uppercase font-semibold">
                   <tr>
@@ -511,6 +512,72 @@ export const AdminHub: React.FC<AdminHubProps> = ({ currentUser }) => {
                   ))}
                 </tbody>
               </table>
+            </div>
+
+            {/* Mobile Card List View */}
+            <div className="sm:hidden divide-y divide-gray-100">
+              {filteredUsers.map((u) => (
+                <div key={u.id} className="p-4 space-y-2.5">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <p className="font-bold text-sm text-gray-900">{u.name}</p>
+                      <p className="text-[11px] text-gray-400 font-mono truncate max-w-[200px]">{u.email}</p>
+                    </div>
+                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-bold uppercase text-[9px] shrink-0 ${
+                      u.is_active ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-gray-100 text-gray-600'
+                    }`}>
+                      {u.is_active ? <CheckCircle className="w-2.5 h-2.5" /> : <XCircle className="w-2.5 h-2.5" />}
+                      {u.is_active ? 'Active' : 'Disabled'}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-2 pt-1">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[10px] text-gray-500 font-bold uppercase">Role:</span>
+                      <select
+                        value={u.role}
+                        onChange={(e) => handleChangeRole(u, e.target.value as 'admin' | 'finder' | 'user')}
+                        disabled={u.id === currentUser.id}
+                        className="px-2 py-1 text-xs border border-gray-200 rounded-lg bg-gray-50 font-semibold"
+                      >
+                        <option value="user">User</option>
+                        <option value="finder">Finder</option>
+                        <option value="admin">Admin</option>
+                      </select>
+                    </div>
+
+                    {u.is_blacklisted && (
+                      <span className="text-rose-600 text-[10px] font-bold">Blacklisted</span>
+                    )}
+                  </div>
+
+                  {u.id !== currentUser.id && (
+                    <div className="pt-2 flex items-center justify-end gap-2 border-t border-gray-50">
+                      {u.is_blacklisted ? (
+                        <button
+                          onClick={() => handleUnblacklistUser(u)}
+                          className="px-2.5 py-1 text-xs font-semibold bg-emerald-50 text-emerald-700 rounded-lg border border-emerald-200"
+                        >
+                          Restore
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => setSelectedUserForBlacklist(u)}
+                          className="px-2.5 py-1 text-xs font-semibold bg-rose-50 text-rose-700 rounded-lg border border-rose-200"
+                        >
+                          Blacklist
+                        </button>
+                      )}
+                      <button
+                        onClick={() => handleToggleActive(u)}
+                        className="px-2.5 py-1 text-xs text-gray-600 hover:text-gray-900 border border-gray-200 rounded-lg"
+                      >
+                        {u.is_active ? 'Deactivate' : 'Activate'}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>

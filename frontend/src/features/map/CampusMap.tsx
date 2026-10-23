@@ -133,19 +133,19 @@ export const CampusMap: React.FC<CampusMapProps> = ({ items, onSelectItem }) => 
     : null;
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6 animate-in fade-in duration-200">
+    <div className="p-3.5 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-5 sm:space-y-6 animate-in fade-in duration-200">
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-slate-200/80">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 pb-2 border-b border-slate-200/80">
         <div>
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1">
               <Navigation className="w-3 h-3" /> GEU Campus GIS Explorer
             </span>
             <span className="text-xs text-slate-400 font-semibold">•</span>
-            <span className="text-xs text-slate-500 font-bold">{locations.length} Campus Covered Areas</span>
+            <span className="text-xs text-slate-500 font-bold">{locations.length} Campus Areas</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
+          <h1 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
             Campus Hotspots & Spatial Directory
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
@@ -154,30 +154,30 @@ export const CampusMap: React.FC<CampusMapProps> = ({ items, onSelectItem }) => 
         </div>
 
         {/* View & Type Controls */}
-        <div className="flex items-center gap-2 flex-wrap">
-          <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full sm:w-auto pb-1">
+          <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200 shrink-0">
             <button
               onClick={() => setViewMode('map')}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${viewMode === 'map' ? 'bg-white shadow-xs text-blue-700' : 'text-slate-600 hover:text-slate-900'
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer whitespace-nowrap ${viewMode === 'map' ? 'bg-white shadow-xs text-blue-700' : 'text-slate-600 hover:text-slate-900'
                 }`}
             >
               Interactive Map
             </button>
             <button
               onClick={() => setViewMode('directory')}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${viewMode === 'directory' ? 'bg-white shadow-xs text-blue-700' : 'text-slate-600 hover:text-slate-900'
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer whitespace-nowrap ${viewMode === 'directory' ? 'bg-white shadow-xs text-blue-700' : 'text-slate-600 hover:text-slate-900'
                 }`}
             >
               Building List
             </button>
           </div>
 
-          <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200">
+          <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200 shrink-0">
             {(['all', 'lost', 'found'] as const).map((t) => (
               <button
                 key={t}
                 onClick={() => setFilterType(t)}
-                className={`px-3 py-1.5 text-xs font-bold rounded-lg capitalize transition-all cursor-pointer ${filterType === t ? 'bg-white shadow-xs text-slate-900' : 'text-slate-600 hover:text-slate-900'
+                className={`px-3 py-1.5 text-xs font-bold rounded-lg capitalize transition-all cursor-pointer whitespace-nowrap ${filterType === t ? 'bg-white shadow-xs text-slate-900' : 'text-slate-600 hover:text-slate-900'
                   }`}
               >
                 {t}
@@ -188,7 +188,7 @@ export const CampusMap: React.FC<CampusMapProps> = ({ items, onSelectItem }) => 
       </div>
 
       {/* Search Input */}
-      <div className="bg-white p-3.5 sm:p-4 rounded-3xl shadow-xs border border-slate-200/90">
+      <div className="bg-white p-3 sm:p-4 rounded-2xl sm:rounded-3xl shadow-xs border border-slate-200/90">
         <div className="relative">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
@@ -196,7 +196,7 @@ export const CampusMap: React.FC<CampusMapProps> = ({ items, onSelectItem }) => 
             placeholder="Search campus buildings, Central Library, Cafeteria, Sports Complex..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-2xl bg-slate-50/50 hover:bg-white focus:bg-white focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-xl sm:rounded-2xl bg-slate-50/50 hover:bg-white focus:bg-white focus:ring-2 focus:ring-blue-500"
           />
         </div>
       </div>
@@ -207,12 +207,12 @@ export const CampusMap: React.FC<CampusMapProps> = ({ items, onSelectItem }) => 
           <p className="text-xs text-slate-500 font-bold">Querying PostGIS spatial coordinates...</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
 
           {/* Main Map or Directory Cards (2 Columns) */}
           <div className="lg:col-span-2 space-y-4">
             {viewMode === 'map' ? (
-              <div className="h-[520px] rounded-3xl overflow-hidden border border-slate-200/90 shadow-md relative z-0">
+              <div className="h-[340px] sm:h-[520px] rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/90 shadow-md relative z-0">
                 <MapContainer
                   center={[GEU_CAMPUS_CENTER.lat, GEU_CAMPUS_CENTER.lng]}
                   zoom={16}

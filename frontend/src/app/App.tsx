@@ -4,6 +4,7 @@ import { useItems } from '../hooks/useItems';
 import { useVisitorTracker } from '../hooks/useVisitorTracker';
 import { Header } from '../components/layout/Header';
 import { Sidebar } from '../components/layout/Sidebar';
+import { BottomNav } from '../components/layout/BottomNav';
 import { Dashboard } from '../features/dashboard/Dashboard';
 import { ItemList } from '../features/items/ItemList';
 import { ReportItemForm } from '../features/items/ReportItemForm';
@@ -36,6 +37,7 @@ function AppContent() {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [unreadNotifs, setUnreadNotifs] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Auth modal management for seamless landing page interaction
   const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -220,41 +222,42 @@ function AppContent() {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
         <header className="bg-slate-950 text-white border-b border-slate-800/80 sticky top-0 z-40 shadow-md">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
+          <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
             <div 
               onClick={() => setActiveTab('landing')}
-              className="flex items-center gap-3.5 cursor-pointer group"
+              className="flex items-center gap-2.5 sm:gap-3.5 cursor-pointer group"
             >
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-amber-400 p-0.5 shadow-md shadow-blue-500/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
-                <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-amber-400 p-0.5 shadow-md shadow-blue-500/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-200 shrink-0">
+                <div className="w-full h-full bg-slate-950 rounded-[13px] sm:rounded-[14px] flex items-center justify-center">
                   <div className="w-4 h-4 text-blue-400 font-black text-xs flex items-center justify-center">RE</div>
                 </div>
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xl font-black tracking-tight text-white">
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="text-lg sm:text-xl font-black tracking-tight text-white">
                     RE<span className="text-blue-500">claim</span>
                   </span>
-                  <span className="px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full">
-                    GEU Directory
+                  <span className="px-1.5 sm:px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full">
+                    Directory
                   </span>
                 </div>
-                <p className="text-[10px] text-slate-400 font-semibold tracking-wide">
-                  Graphic Era University • Dehradun
+                <p className="text-[10px] text-slate-400 font-semibold tracking-wide truncate max-w-[140px] sm:max-w-none">
+                  Graphic Era University
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <button
                 onClick={() => setActiveTab('landing')}
-                className="text-xs font-bold text-slate-300 hover:text-white px-3.5 py-2 rounded-xl border border-slate-800 hover:bg-slate-900 transition-colors cursor-pointer"
+                className="text-xs font-bold text-slate-300 hover:text-white px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl border border-slate-800 hover:bg-slate-900 transition-colors cursor-pointer whitespace-nowrap"
               >
-                ← Back to Campus Home
+                <span className="hidden sm:inline">← Back to Campus Home</span>
+                <span className="sm:hidden">← Home</span>
               </button>
               <button
                 onClick={() => handleOpenAuth('login')}
-                className="text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl shadow-md shadow-blue-600/25 transition-all cursor-pointer"
+                className="text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl shadow-md shadow-blue-600/25 transition-all cursor-pointer whitespace-nowrap"
               >
                 Sign In
               </button>
@@ -473,6 +476,8 @@ function AppContent() {
           setActiveTab('search');
         }}
         onUnreadCountChange={setUnreadNotifs}
+        isMobileMenuOpen={isMobileMenuOpen}
+        onToggleMobileMenu={setIsMobileMenuOpen}
       />
       <div className="flex flex-1">
         <Sidebar 
@@ -482,10 +487,18 @@ function AppContent() {
           items={items}
           unreadNotifsCount={unreadNotifs}
         />
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto pb-24 md:pb-8">
           {renderContent()}
         </main>
       </div>
+
+      {/* Modern Mobile Bottom Navigation Bar */}
+      <BottomNav
+        activeTab={activeTab}
+        onTabChange={handleNavigateTab}
+        onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
+        unreadCount={unreadNotifs}
+      />
 
       {/* Global Item Details Modal */}
       {selectedItem && (

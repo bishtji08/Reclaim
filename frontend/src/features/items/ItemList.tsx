@@ -4,7 +4,10 @@ import {
   Grid, 
   List as ListIcon, 
   RotateCcw, 
-  Package
+  Package,
+  SlidersHorizontal,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 import { Item } from '../../types';
 import { ItemCard } from './ItemCard';
@@ -32,6 +35,7 @@ export const ItemList: React.FC<ItemListProps> = ({
   const [sortBy, setSortBy] = useState('newest');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
 
   useEffect(() => {
     setSearchTerm(initialSearchTerm);
@@ -138,23 +142,23 @@ export const ItemList: React.FC<ItemListProps> = ({
 
       {/* Advanced Filter Toolbar */}
       {showFilters && (
-        <div className="bg-white rounded-3xl shadow-xs border border-slate-200/90 p-5 sm:p-6 space-y-4">
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xs border border-slate-200/90 p-3.5 sm:p-6 space-y-3 sm:space-y-4">
           
           {/* Top Search & Type Filter Tabs */}
-          <div className="flex flex-col md:flex-row gap-3">
+          <div className="flex flex-col md:flex-row gap-2.5 sm:gap-3">
             <div className="relative flex-1">
               <Search className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Search by keywords, serial number, item tags, or campus building..."
+                placeholder="Search keywords, serials, tags, buildings..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-2xl bg-slate-50/50 hover:bg-white focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-slate-800 placeholder-slate-400"
+                className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl sm:rounded-2xl bg-slate-50/50 hover:bg-white focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-slate-800 placeholder-slate-400"
               />
             </div>
 
-            {/* Lost / Found Type Toggle */}
-            <div className="flex bg-slate-100 p-1 rounded-2xl border border-slate-200/80 self-start md:self-auto shrink-0">
+            {/* Desktop Lost / Found Type Toggle */}
+            <div className="hidden md:flex bg-slate-100 p-1 rounded-2xl border border-slate-200/80 self-start md:self-auto shrink-0">
               <button
                 onClick={() => setTypeFilter('all')}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
@@ -188,8 +192,77 @@ export const ItemList: React.FC<ItemListProps> = ({
             </div>
           </div>
 
+          {/* Quick Filter Horizontal Scrollable Chips */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+            <button
+              onClick={() => setTypeFilter('all')}
+              className={`md:hidden px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer ${
+                typeFilter === 'all'
+                  ? 'bg-slate-900 text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              All Items
+            </button>
+            <button
+              onClick={() => setTypeFilter('lost')}
+              className={`md:hidden px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer ${
+                typeFilter === 'lost'
+                  ? 'bg-rose-600 text-white shadow-xs'
+                  : 'bg-rose-50 text-rose-700 border border-rose-200'
+              }`}
+            >
+              Lost Only
+            </button>
+            <button
+              onClick={() => setTypeFilter('found')}
+              className={`md:hidden px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer ${
+                typeFilter === 'found'
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : 'bg-blue-50 text-blue-700 border border-blue-200'
+              }`}
+            >
+              Found Only
+            </button>
+
+            {categories.map((cat) => {
+              const isSelected = categoryFilter.toLowerCase() === cat.toLowerCase();
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setCategoryFilter(isSelected ? 'all' : cat)}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer capitalize ${
+                    isSelected
+                      ? 'bg-blue-600 text-white shadow-xs'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-transparent'
+                  }`}
+                >
+                  {cat === 'all' ? 'All Categories' : cat}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Mobile Advanced Filters Toggle Button */}
+          <button
+            type="button"
+            onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+            className="md:hidden flex items-center justify-between w-full py-2 px-3.5 bg-slate-50 hover:bg-slate-100 rounded-xl text-xs font-bold text-slate-700 border border-slate-200 transition-colors cursor-pointer"
+          >
+            <span className="flex items-center gap-1.5">
+              <SlidersHorizontal className="w-3.5 h-3.5 text-blue-600" />
+              <span>More Filters & Sorting</span>
+              {hasActiveFilters && (
+                <span className="px-1.5 py-0.2 bg-blue-600 text-white rounded-full text-[10px] font-extrabold">
+                  Active
+                </span>
+              )}
+            </span>
+            {showAdvancedFilters ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
+          </button>
+
           {/* Secondary Filter Dropdowns */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-100 text-xs">
+          <div className={`grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-100 text-xs ${showAdvancedFilters ? 'block' : 'hidden md:grid'}`}>
             
             {/* Category Filter */}
             <div>
@@ -270,7 +343,7 @@ export const ItemList: React.FC<ItemListProps> = ({
           )}
         </div>
       ) : viewMode === 'grid' ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6">
           {filteredItems.map(item => (
             <ItemCard 
               key={item.id} 

@@ -92,10 +92,10 @@ export const NotificationList: React.FC<NotificationListProps> = ({ onSelectNoti
   });
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 max-w-4xl mx-auto space-y-6 animate-in fade-in duration-200">
+    <div className="p-3.5 sm:p-6 lg:p-8 max-w-4xl mx-auto space-y-5 sm:space-y-6 animate-in fade-in duration-200">
       
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-slate-200/80">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 pb-2 border-b border-slate-200/80">
         <div>
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200">
@@ -107,7 +107,7 @@ export const NotificationList: React.FC<NotificationListProps> = ({ onSelectNoti
               </span>
             )}
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
+          <h1 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
             Notification Center
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
@@ -185,7 +185,7 @@ export const NotificationList: React.FC<NotificationListProps> = ({ onSelectNoti
                   if (isUnread) markAsRead(notif.id);
                   if (onSelectNotification) onSelectNotification(notif);
                 }}
-                className={`p-4 sm:p-5 rounded-3xl border transition-all cursor-pointer flex items-start gap-4 ${
+                className={`p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl border transition-all cursor-pointer flex items-start gap-3 sm:gap-4 ${
                   isUnread
                     ? 'bg-blue-50/50 hover:bg-blue-50 border-blue-200 shadow-xs'
                     : 'bg-white hover:bg-slate-50 border-slate-200/80 shadow-2xs'

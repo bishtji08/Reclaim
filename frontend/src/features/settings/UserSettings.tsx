@@ -106,7 +106,7 @@ export const UserSettings: React.FC<UserSettingsProps> = ({ user, onProfileUpdat
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 max-w-5xl mx-auto space-y-8 animate-in fade-in duration-200">
+    <div className="p-3.5 sm:p-6 lg:p-8 max-w-5xl mx-auto space-y-6 sm:space-y-8 animate-in fade-in duration-200">
       
       {/* Header */}
       <div className="pb-2 border-b border-slate-200/80">
@@ -117,7 +117,7 @@ export const UserSettings: React.FC<UserSettingsProps> = ({ user, onProfileUpdat
           <span className="text-xs text-slate-400 font-semibold">•</span>
           <span className="text-xs text-slate-500 font-bold capitalize">{user.role} Profile</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
+        <h1 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
           Account & Security Preferences
         </h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
@@ -125,10 +125,10 @@ export const UserSettings: React.FC<UserSettingsProps> = ({ user, onProfileUpdat
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
         
         {/* Profile Card */}
-        <div className="bg-white rounded-3xl shadow-xs border border-slate-200/90 p-6 sm:p-8 flex flex-col justify-between space-y-6">
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xs border border-slate-200/90 p-4.5 sm:p-8 flex flex-col justify-between space-y-5 sm:space-y-6">
           <form onSubmit={handleUpdateProfile} className="space-y-4 text-xs sm:text-sm">
             <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
               <div className="p-2.5 rounded-2xl bg-blue-50 text-blue-600">
@@ -201,7 +201,7 @@ export const UserSettings: React.FC<UserSettingsProps> = ({ user, onProfileUpdat
         </div>
 
         {/* Security / Password Card */}
-        <div className="bg-white rounded-3xl shadow-xs border border-slate-200/90 p-6 sm:p-8 flex flex-col justify-between space-y-6">
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xs border border-slate-200/90 p-4.5 sm:p-8 flex flex-col justify-between space-y-5 sm:space-y-6">
           <form onSubmit={handleChangePassword} className="space-y-4 text-xs sm:text-sm">
             <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
               <div className="p-2.5 rounded-2xl bg-indigo-50 text-indigo-600">

@@ -92,23 +92,23 @@ export const Dashboard: React.FC<DashboardProps> = ({
   ];
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-200">
+    <div className="p-3.5 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6 sm:space-y-8 animate-in fade-in duration-200">
       
       {/* Premium GEU Portal Header */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 text-white p-6 sm:p-8 lg:p-10 shadow-xl border border-slate-800">
+      <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 text-white p-4.5 sm:p-8 lg:p-10 shadow-xl border border-slate-800">
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-10 -left-10 w-80 h-80 bg-amber-500/5 rounded-full blur-2xl pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-          <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/90 border border-blue-500/30 text-xs font-extrabold uppercase tracking-wider text-blue-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 sm:gap-6">
+          <div className="space-y-2 sm:space-y-3 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-slate-900/90 border border-blue-500/30 text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-blue-300">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse" />
               Graphic Era University Portal
               <span className="text-slate-600">•</span>
               <span className="text-amber-300 capitalize">{user.role} workspace</span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white">
+            <h1 className="text-xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white leading-tight">
               Welcome back, {user.name}!
             </h1>
             
@@ -117,16 +117,16 @@ export const Dashboard: React.FC<DashboardProps> = ({
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
             <button
               onClick={() => onNavigate && onNavigate('report-lost')}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-extrabold text-xs shadow-md shadow-rose-900/30 transition-all hover:-translate-y-0.5 cursor-pointer"
+              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-extrabold text-xs shadow-md shadow-rose-900/30 transition-all hover:-translate-y-0.5 active:scale-98 cursor-pointer"
             >
               <FileText className="w-4 h-4" /> Report Lost Item
             </button>
             <button
               onClick={() => onNavigate && onNavigate('report-found')}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs shadow-md shadow-blue-900/30 transition-all hover:-translate-y-0.5 cursor-pointer"
+              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs shadow-md shadow-blue-900/30 transition-all hover:-translate-y-0.5 active:scale-98 cursor-pointer"
             >
               <PlusCircle className="w-4 h-4" /> Report Found Item
             </button>
@@ -134,22 +134,24 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </div>
 
-      {/* KPI Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+      {/* KPI Stats Grid - 2x2 on Mobile, 4 Columns on Desktop */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-5">
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (
             <div 
               key={stat.title} 
-              className={`bg-white rounded-2xl shadow-xs border ${stat.border} ${stat.accent} p-5 hover:shadow-md transition-all duration-200 flex items-center justify-between group`}
+              className={`bg-white rounded-2xl shadow-xs border ${stat.border} ${stat.accent} p-3.5 sm:p-5 hover:shadow-md transition-all duration-200 flex flex-col justify-between group`}
             >
-              <div>
-                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">{stat.title}</p>
-                <p className="text-2xl sm:text-3xl font-black text-slate-900 mt-1">{stat.value}</p>
-                <p className="text-[11px] text-slate-500 mt-0.5 font-medium">{stat.desc}</p>
+              <div className="flex items-start justify-between gap-1.5">
+                <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider line-clamp-1">{stat.title}</p>
+                <div className={`${stat.bgColor} p-1.5 sm:p-2.5 rounded-xl sm:rounded-2xl group-hover:scale-105 transition-transform shrink-0`}>
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.25]" />
+                </div>
               </div>
-              <div className={`${stat.bgColor} p-3 rounded-2xl group-hover:scale-110 transition-transform duration-200`}>
-                <Icon className="w-6 h-6 stroke-[2.25]" />
+              <div className="mt-2 sm:mt-3">
+                <p className="text-xl sm:text-3xl font-black text-slate-900">{stat.value}</p>
+                <p className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5 font-medium truncate">{stat.desc}</p>
               </div>
             </div>
           );
@@ -192,21 +194,21 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 <div 
                   key={item.id} 
                   onClick={() => onSelectItem && onSelectItem(item)}
-                  className="p-4 sm:p-5 hover:bg-slate-50/80 transition-colors flex items-center gap-4 cursor-pointer group"
+                  className="p-3 sm:p-5 hover:bg-slate-50/80 active:bg-slate-100 transition-colors flex items-center gap-3 sm:gap-4 cursor-pointer group"
                 >
                   {/* Item Image Thumbnail */}
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-slate-100 flex-shrink-0 overflow-hidden flex items-center justify-center border border-slate-200/80 group-hover:border-blue-300 transition-colors">
+                  <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-slate-100 shrink-0 overflow-hidden flex items-center justify-center border border-slate-200/80 group-hover:border-blue-300 transition-colors">
                     {item.images && item.images.length > 0 ? (
                       <img src={item.images[0]} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     ) : (
-                      <Package className="w-6 h-6 text-slate-400 stroke-[1.5]" />
+                      <Package className="w-5 h-5 sm:w-6 sm:h-6 text-slate-400 stroke-[1.5]" />
                     )}
                   </div>
 
                   {/* Title & Metadata */}
                   <div className="flex-1 min-w-0 space-y-1">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className={`px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider border ${
+                    <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                      <span className={`px-1.5 sm:px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider border ${
                         item.type === 'lost' 
                           ? 'bg-rose-50 text-rose-700 border-rose-200' 
                           : 'bg-sky-50 text-sky-700 border-sky-200'
@@ -214,36 +216,41 @@ export const Dashboard: React.FC<DashboardProps> = ({
                         {item.type}
                       </span>
                       
-                      <h4 className="text-sm font-extrabold text-slate-900 truncate group-hover:text-blue-600 transition-colors">
+                      <h4 className="text-xs sm:text-sm font-extrabold text-slate-900 truncate group-hover:text-blue-600 transition-colors">
                         {item.title}
                       </h4>
 
                       {item.isUrgent && (
-                        <span className="px-2 py-0.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-md text-[10px] font-extrabold shadow-2xs">
+                        <span className="px-1.5 sm:px-2 py-0.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-md text-[9px] sm:text-[10px] font-extrabold shadow-2xs">
                           Urgent
                         </span>
                       )}
+
+                      {/* Mobile inline status badge */}
+                      <span className={`sm:hidden inline-flex px-1.5 py-0.5 rounded-md text-[9px] font-bold border capitalize ${getStatusColor(item.status)}`}>
+                        {item.status}
+                      </span>
                     </div>
 
-                    <p className="text-xs text-slate-500 line-clamp-1 font-medium leading-relaxed">
+                    <p className="text-[11px] sm:text-xs text-slate-500 line-clamp-1 font-medium leading-relaxed">
                       {item.description}
                     </p>
 
-                    <div className="flex items-center gap-3 text-[11px] text-slate-400 font-semibold pt-0.5">
-                      <span className="flex items-center gap-1 text-slate-600">
+                    <div className="flex items-center gap-2 sm:gap-3 text-[10px] sm:text-[11px] text-slate-400 font-semibold pt-0.5">
+                      <span className="flex items-center gap-1 text-slate-600 truncate max-w-[140px] sm:max-w-none">
                         <MapPin className="w-3 h-3 text-blue-500 shrink-0" />
                         {item.location?.name || 'Campus Grounds'}
                       </span>
                       <span>•</span>
-                      <span className="flex items-center gap-1 text-slate-500">
+                      <span className="flex items-center gap-1 text-slate-500 shrink-0">
                         <Clock className="w-3 h-3 text-slate-400 shrink-0" />
                         {new Date(item.reportedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
                       </span>
                     </div>
                   </div>
 
-                  {/* Status Badge */}
-                  <div className="flex-shrink-0 pl-2">
+                  {/* Desktop Status Badge */}
+                  <div className="hidden sm:block shrink-0 pl-2">
                     <span className={`inline-flex px-3 py-1 rounded-full text-xs font-bold border capitalize ${getStatusColor(item.status)}`}>
                       {item.status}
                     </span>
