@@ -1,0 +1,29 @@
+{
+  "name": "reclaim-project",
+  "version": "1.0.0",
+  "private": true,
+  "description": "REclaim - Lost & Found Management System",
+  "scripts": {
+    "dev": "npm run dev:frontend",
+    "dev:all": "concurrently \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && npm start",
+    "test": "npm --prefix backend test",
+    "migrate": "cd backend && npm run migrate",
+    "seed": "cd backend && npm run seed",
+    "inspect:schema": "cd backend && npm run inspect:schema"
+  },
+  "keywords": [
+    "lost-and-found",
+    "campus",
+    "management-system",
+    "supabase",
+    "express",
+    "react"
+  ],
+  "devDependencies": {
+    "concurrently": "^10.0.6"
+  }
+}
