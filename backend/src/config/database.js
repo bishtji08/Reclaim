@@ -51,12 +51,14 @@ const connectionConfig = env.databaseUrl
       password: process.env.DB_PASSWORD,
     };
 
+const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+
 const pool = new Pool({
   ...connectionConfig,
   options: '-c search_path=public,extensions',
-  max: Number(process.env.DB_POOL_MAX || 10),
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 10000,
+  max: isServerless ? 2 : Number(process.env.DB_POOL_MAX || 10),
+  idleTimeoutMillis: isServerless ? 5000 : 30000,
+  connectionTimeoutMillis: 20000,
 });
 
 pool.on('error', (err) => {

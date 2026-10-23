@@ -5,7 +5,7 @@ import { Item, Claim, User, Notification, VisitorAnalyticsData } from '../../typ
 // Create axios instance with default config
 export const apiClient = axios.create({
   baseURL: api.baseURL,
-  timeout: 10000,
+  timeout: 30000,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
