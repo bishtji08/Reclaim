@@ -3,8 +3,9 @@ import api from './config';
 import { Item, Claim, User, Notification, VisitorAnalyticsData } from '../../types';
 
 // Create axios instance with default config
+// Note: Endpoints in api.* are already fully constructed using API_BASE_URL.
+// Leaving baseURL unset prevents Axios from prepending /api to /api/auth/... -> /api/api/auth/...
 export const apiClient = axios.create({
-  baseURL: api.baseURL,
   timeout: 30000,
   withCredentials: true,
   headers: {
@@ -14,6 +15,11 @@ export const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   (config) => {
+    // Guard against duplicate /api/api in requested paths
+    if (typeof config.url === 'string') {
+      config.url = config.url.replace(/^\/api\/api(\/|$)/, '/api$1');
+    }
+
     // The server sets an HttpOnly cookie. Let the browser build the multipart
     // boundary for uploads instead of forcing the default JSON header.
     if (config.data instanceof FormData) {

@@ -107,8 +107,8 @@ if (env.nodeEnv !== 'production') {
 }
 app.use(compression());
 
-// Health check endpoint
-app.get('/health', (req, res) => {
+// Health check endpoint (accessible via /health and /api/health)
+app.get(['/health', '/api/health'], (req, res) => {
   res.status(200).json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
@@ -116,18 +116,39 @@ app.get('/health', (req, res) => {
   });
 });
 
-// API routes
+// API routes - support both with and without /api prefix for proxy/serverless flexibility
 app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
+
 app.use('/api/users', authenticateToken, userRoutes);
+app.use('/users', authenticateToken, userRoutes);
+
 app.use('/api/items', itemRoutes);
+app.use('/items', itemRoutes);
+
 app.use('/api/claims', authenticateToken, claimRoutes);
+app.use('/claims', authenticateToken, claimRoutes);
+
 app.use('/api/notifications', authenticateToken, notificationRoutes);
+app.use('/notifications', authenticateToken, notificationRoutes);
+
 app.use('/api/analytics', analyticsRoutes);
+app.use('/analytics', analyticsRoutes);
+
 app.use('/api/locations', locationRoutes);
+app.use('/locations', locationRoutes);
+
 app.use('/api/categories', categoryRoutes);
+app.use('/categories', categoryRoutes);
+
 app.use('/api/media', mediaRoutes);
+app.use('/media', mediaRoutes);
+
 app.use('/api/flags', authenticateToken, flagRoutes);
+app.use('/flags', authenticateToken, flagRoutes);
+
 app.use('/api/reviews', reviewRoutes);
+app.use('/reviews', reviewRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

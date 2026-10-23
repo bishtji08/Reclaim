@@ -1,16 +1,35 @@
 const getApiBaseUrl = (): string => {
-  const envUrl = import.meta.env.VITE_API_URL;
-  if (typeof window !== 'undefined' && window.location?.hostname) {
-    const currentHost = window.location.hostname;
-    // When accessing from a mobile device or network IP, make sure API calls target that host
-    if (currentHost !== 'localhost' && currentHost !== '127.0.0.1') {
-      if (envUrl && (envUrl.includes('localhost') || envUrl.includes('127.0.0.1'))) {
-        return envUrl.replace(/localhost|127\.0\.0\.1/, currentHost);
-      }
-      return `${window.location.protocol}//${currentHost}:5000/api`;
-    }
+  const envUrl = (import.meta.env.VITE_API_URL as string | undefined)?.trim();
+
+  // 1. If an explicit environment override is provided, use it
+  if (envUrl) {
+    return envUrl.replace(/\/+$/, '');
   }
-  return envUrl || 'http://localhost:5000/api';
+
+  // 2. In browser environments, inspect the current hostname
+  if (typeof window !== 'undefined' && window.location) {
+    const { hostname, protocol } = window.location;
+
+    // Check if running on local development machine
+    const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1';
+
+    // Check if running on a local private network IP (e.g. testing from a mobile phone on local Wi-Fi)
+    const isPrivateLanIp =
+      /^192\.168\.\d+\.\d+$/.test(hostname) ||
+      /^10\.\d+\.\d+\.\d+$/.test(hostname) ||
+      /^172\.(1[6-9]|2\d|3[0-1])\.\d+\.\d+$/.test(hostname);
+
+    if (isLocalhost || isPrivateLanIp) {
+      return `${protocol}//${hostname}:5000/api`;
+    }
+
+    // In production (Vercel, custom domains, *.vercel.app), ALWAYS use relative '/api'
+    // This routes through Vercel's rewrite rules to the serverless backend without cross-origin or port issues.
+    return '/api';
+  }
+
+  // 3. Fallback for SSR / build time
+  return import.meta.env.PROD ? '/api' : 'http://localhost:5000/api';
 };
 
 export const API_BASE_URL = getApiBaseUrl();
