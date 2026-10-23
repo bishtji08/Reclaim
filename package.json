@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "REclaim - Lost & Found Management System",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
   "scripts": {
     "dev": "npm run dev:frontend",
     "dev:all": "concurrently \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
@@ -15,6 +19,26 @@
     "seed": "cd backend && npm run seed",
     "inspect:schema": "cd backend && npm run inspect:schema"
   },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.11.0",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^5.3.0",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.3.2",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.12.1",
+    "multer": "^2.4.0",
+    "nodemailer": "^10.2.0",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6"
+  },
   "keywords": [
     "lost-and-found",
     "campus",
@@ -22,8 +46,5 @@
     "supabase",
     "express",
     "react"
-  ],
-  "devDependencies": {
-    "concurrently": "^10.0.6"
-  }
+  ]
 }

@@ -15,7 +15,13 @@ const configuredOrigins = (env.frontendUrl || '')
 const isOriginAllowed = (origin) => {
   if (!origin) return true;
   const normalizedOrigin = origin.replace(/\/$/, '');
-  if (configuredOrigins.includes(normalizedOrigin)) return true;
+  if (configuredOrigins.includes(normalizedOrigin) || configuredOrigins.includes('*')) return true;
+
+  // Automatically allow Vercel production and preview deployment URLs
+  try {
+    const parsed = new URL(origin);
+    if (parsed.hostname.endsWith('.vercel.app')) return true;
+  } catch {}
 
   if (env.nodeEnv === 'development') {
     try {

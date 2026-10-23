@@ -17,7 +17,7 @@ export const API_BASE_URL = getApiBaseUrl();
 
 export const api = {
   baseURL: API_BASE_URL,
-  
+
   // Auth endpoints
   auth: {
     login: `${API_BASE_URL}/auth/login`,
@@ -36,7 +36,7 @@ export const api = {
     markRead: (id: string) => `${API_BASE_URL}/notifications/${id}/read`,
     markAllRead: `${API_BASE_URL}/notifications/mark-all-read`,
   },
-  
+
   // Items endpoints
   items: {
     list: `${API_BASE_URL}/items`,
@@ -47,7 +47,7 @@ export const api = {
     matches: (id: string) => `${API_BASE_URL}/items/${id}/matches`,
     updateStatus: (id: string) => `${API_BASE_URL}/items/${id}/status`,
   },
-  
+
   // Claims endpoints
   claims: {
     list: `${API_BASE_URL}/claims`,
@@ -57,7 +57,7 @@ export const api = {
     withdraw: (id: string) => `${API_BASE_URL}/claims/${id}/withdraw`,
     myClaims: `${API_BASE_URL}/claims/my-claims`,
   },
-  
+
   // Categories endpoints
   categories: {
     list: `${API_BASE_URL}/categories`,
@@ -66,12 +66,12 @@ export const api = {
     delete: (id: string | number) => `${API_BASE_URL}/categories/${id}`,
     subcategories: (id: string | number) => `${API_BASE_URL}/categories/${id}/subcategories`,
   },
-  
+
   // Locations endpoints
   locations: {
     list: `${API_BASE_URL}/locations`,
   },
-  
+
   // Analytics endpoints
   analytics: {
     dashboard: `${API_BASE_URL}/analytics/dashboard`,

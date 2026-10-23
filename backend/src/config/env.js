@@ -25,10 +25,5 @@ module.exports = {
   cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
   cloudinaryItemPreset: process.env.CLOUDINARY_ITEM_PRESET || 'reclaim_items',
   cloudinaryProofPreset: process.env.CLOUDINARY_PROOF_PRESET || 'reclaim_proof',
-  brevoApiKey: process.env.BREVO_API_KEY,
-  brevoSenderEmail: process.env.BREVO_SENDER_EMAIL || process.env.EMAIL_FROM || 'no-reply@reclaim-geu.edu',
-  brevoSenderName: process.env.BREVO_SENDER_NAME || 'REclaim Lost & Found',
-  ownerNotificationEmail: process.env.ADMIN_NOTIFICATION_EMAIL || process.env.OWNER_EMAIL || process.env.EMAIL_USER,
-  telegramBotToken: process.env.TELEGRAM_BOT_TOKEN,
-  telegramChatId: process.env.TELEGRAM_CHAT_ID,
+
 };
