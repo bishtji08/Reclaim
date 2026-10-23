@@ -101,6 +101,4 @@ npm run dev:frontend
 
 | Role | Email | Password |
 |------|-------|----------|
-| **Admin** | `bixtysarthak@gmail.com` | `password123` |
-| **Finder** | `sarthakbisht2005@gmail.com` | `password123` |
-| **User** | `240211767@geu.ac.in` | `password123` |
+|
