@@ -314,17 +314,17 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               onSubmit={handleHeroSearchSubmit}
               className="relative flex items-center bg-white/10 hover:bg-white/15 focus-within:bg-white/20 border border-white/20 rounded-2xl p-1.5 backdrop-blur-xl shadow-2xl transition-all"
             >
-              <Search className="w-5 h-5 text-blue-300 ml-3.5 flex-shrink-0" />
+              <Search className="w-4 h-4 sm:w-5 sm:h-5 text-blue-300 ml-2.5 sm:ml-3.5 flex-shrink-0" />
               <input
                 type="text"
                 value={heroSearchQuery}
                 onChange={(e) => setHeroSearchQuery(e.target.value)}
-                placeholder="Search lost items (e.g., Scientific Calculator, Student ID, Wallet, Jacket)..."
-                className="w-full bg-transparent px-3.5 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none"
+                placeholder="Search lost items (e.g., ID, Calculator, Wallet)..."
+                className="w-full min-w-0 bg-transparent px-2.5 sm:px-3.5 py-2 sm:py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none"
               />
               <button
                 type="submit"
-                className="flex-shrink-0 px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-xl transition-all shadow-md cursor-pointer"
+                className="flex-shrink-0 px-3 sm:px-5 py-2 sm:py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-xl transition-all shadow-md cursor-pointer"
               >
                 Search
               </button>
@@ -332,26 +332,26 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           {/* University Trust Badges */}
-          <div className="pt-8 border-t border-slate-800/80 grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
-            <div className="p-3.5 rounded-2xl bg-slate-900/60 border border-slate-800/60 backdrop-blur-sm">
+          <div className="pt-8 border-t border-slate-800/80 grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 text-left">
+            <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-900/60 border border-slate-800/60 backdrop-blur-sm">
               <Building2 className="w-4 h-4 text-blue-400 mb-1" />
-              <div className="text-sm font-bold text-white">Campus Areas</div>
-              <p className="text-[11px] text-slate-400">Library, Cafeteria, Academic Blocks, Sports, Labs</p>
+              <div className="text-xs sm:text-sm font-bold text-white">Campus Areas</div>
+              <p className="text-[10px] sm:text-[11px] text-slate-400">Library, Cafeteria, Academic Blocks, Sports, Labs</p>
             </div>
-            <div className="p-3.5 rounded-2xl bg-slate-900/60 border border-slate-800/60 backdrop-blur-sm">
+            <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-900/60 border border-slate-800/60 backdrop-blur-sm">
               <Sparkles className="w-4 h-4 text-amber-400 mb-1" />
-              <div className="text-sm font-bold text-white">Automated Matching</div>
-              <p className="text-[11px] text-slate-400">4-factor weighted similarity engine</p>
+              <div className="text-xs sm:text-sm font-bold text-white">Automated Matching</div>
+              <p className="text-[10px] sm:text-[11px] text-slate-400">4-factor weighted similarity engine</p>
             </div>
-            <div className="p-3.5 rounded-2xl bg-slate-900/60 border border-slate-800/60 backdrop-blur-sm">
+            <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-900/60 border border-slate-800/60 backdrop-blur-sm">
               <ShieldCheck className="w-4 h-4 text-emerald-400 mb-1" />
-              <div className="text-sm font-bold text-white">Verified Claims</div>
-              <p className="text-[11px] text-slate-400">Strict ownership proof & anti-fraud rules</p>
+              <div className="text-xs sm:text-sm font-bold text-white">Verified Claims</div>
+              <p className="text-[10px] sm:text-[11px] text-slate-400">Strict ownership proof & anti-fraud rules</p>
             </div>
-            <div className="p-3.5 rounded-2xl bg-slate-900/60 border border-slate-800/60 backdrop-blur-sm">
+            <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-900/60 border border-slate-800/60 backdrop-blur-sm">
               <Lock className="w-4 h-4 text-indigo-400 mb-1" />
-              <div className="text-sm font-bold text-white">Strict Protocols</div>
-              <p className="text-[11px] text-slate-400">Identity Verification & Claim Authentication</p>
+              <div className="text-xs sm:text-sm font-bold text-white">Strict Protocols</div>
+              <p className="text-[10px] sm:text-[11px] text-slate-400">Identity Verification & Claim Authentication</p>
             </div>
           </div>
         </div>
@@ -397,7 +397,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           {/* Category Chips */}
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
+          <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
             {categories.map((cat) => (
               <button
                 key={cat.id}

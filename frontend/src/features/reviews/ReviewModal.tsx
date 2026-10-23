@@ -52,16 +52,16 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, claimId, onClose
   };
 
   return (
-    <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-in fade-in duration-150">
-      <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-100 space-y-5">
+    <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 z-50 animate-in fade-in duration-150">
+      <div className="bg-white rounded-3xl max-w-md w-full p-5 sm:p-8 shadow-2xl border border-slate-100 space-y-4 sm:space-y-5 max-h-[92vh] sm:max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-          <div className="flex items-center gap-3">
-            <span className="p-2.5 rounded-2xl bg-amber-50 text-amber-500 border border-amber-200">
-              <Star className="w-5 h-5 fill-amber-400 text-amber-500" />
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <span className="p-2 sm:p-2.5 rounded-2xl bg-amber-50 text-amber-500 border border-amber-200 shrink-0">
+              <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-amber-400 text-amber-500" />
             </span>
             <div>
-              <h3 className="font-black text-base text-slate-900">Campus Trust Feedback</h3>
-              <p className="text-xs text-slate-500">Rate your item recovery experience</p>
+              <h3 className="font-black text-sm sm:text-base text-slate-900">Campus Trust Feedback</h3>
+              <p className="text-[11px] sm:text-xs text-slate-500">Rate your item recovery experience</p>
             </div>
           </div>
           <button onClick={onClose} className="p-1 text-slate-400 hover:text-slate-600 rounded-full cursor-pointer">
@@ -72,7 +72,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, claimId, onClose
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
           <div>
             <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">Recovered Asset</span>
-            <div className="text-xs font-bold text-slate-900 bg-slate-50 p-3 rounded-2xl border border-slate-200/80">
+            <div className="text-xs font-bold text-slate-900 bg-slate-50 p-2.5 sm:p-3 rounded-2xl border border-slate-200/80">
               {item.title}
             </div>
           </div>
@@ -81,26 +81,28 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, claimId, onClose
             <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">
               Overall Service Rating *
             </label>
-            <div className="flex items-center gap-2">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <button
-                  type="button"
-                  key={star}
-                  onClick={() => setRating(star)}
-                  onMouseEnter={() => setHoverRating(star)}
-                  onMouseLeave={() => setHoverRating(0)}
-                  className="p-1 transition-transform hover:scale-110 cursor-pointer"
-                >
-                  <Star
-                    className={`w-7 h-7 transition-colors ${
-                      (hoverRating || rating) >= star
-                        ? 'text-amber-400 fill-amber-400'
-                        : 'text-slate-200'
-                    }`}
-                  />
-                </button>
-              ))}
-              <span className="text-xs font-black text-slate-800 ml-2">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+              <div className="flex items-center gap-1">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    type="button"
+                    key={star}
+                    onClick={() => setRating(star)}
+                    onMouseEnter={() => setHoverRating(star)}
+                    onMouseLeave={() => setHoverRating(0)}
+                    className="p-0.5 sm:p-1 transition-transform hover:scale-110 cursor-pointer"
+                  >
+                    <Star
+                      className={`w-6 h-6 sm:w-7 sm:h-7 transition-colors ${
+                        (hoverRating || rating) >= star
+                          ? 'text-amber-400 fill-amber-400'
+                          : 'text-slate-200'
+                      }`}
+                    />
+                  </button>
+                ))}
+              </div>
+              <span className="text-xs font-black text-slate-800 ml-1 sm:ml-2">
                 {rating === 5 ? 'Exceptional' : rating === 4 ? 'Great' : rating === 3 ? 'Good' : rating === 2 ? 'Fair' : 'Poor'}
               </span>
             </div>

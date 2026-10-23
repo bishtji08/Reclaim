@@ -289,7 +289,7 @@ export const AnalyticsDashboard: React.FC = () => {
         <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-150">
           
           {/* Live Beacon Banner */}
-          <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 rounded-2xl sm:rounded-3xl p-4.5 sm:p-6 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row md:items-center md:justify-between gap-5 sm:gap-6">
+          <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 rounded-2xl sm:rounded-3xl p-5 sm:p-7 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row md:items-center md:justify-between gap-5 sm:gap-6">
             <div className="space-y-2 z-10">
               <div className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[10px] sm:text-xs font-bold">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
@@ -305,7 +305,7 @@ export const AnalyticsDashboard: React.FC = () => {
 
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 sm:p-4 border border-white/10 text-xs space-y-1.5 sm:space-y-2 max-w-sm z-10">
               <div className="flex items-center gap-2 font-black text-amber-300 text-xs">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>Privacy By Design Guarantee</span>
               </div>
               <p className="text-slate-300 text-[10px] sm:text-[11px] leading-relaxed">
@@ -321,13 +321,13 @@ export const AnalyticsDashboard: React.FC = () => {
               return (
                 <div
                   key={idx}
-                  className={`bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 shadow-xs border ${card.border} hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-2 group`}
+                  className={`bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-xs border ${card.border} hover:shadow-md transition-all flex flex-col justify-between gap-2 group`}
                 >
                   <div>
-                    <div className="flex items-center gap-1.5 sm:gap-2">
-                      <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 line-clamp-1">{card.title}</p>
+                    <div className="flex items-start justify-between gap-1">
+                      <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-500 leading-tight min-h-[26px] sm:min-h-0 flex-1">{card.title}</p>
                       {card.badge && (
-                        <span className="px-1.5 sm:px-2 py-0.2 sm:py-0.5 text-[8px] sm:text-[9px] font-black uppercase rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <span className="shrink-0 px-1.5 py-0.5 text-[8px] sm:text-[9px] font-black uppercase rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
                           {card.badge}
                         </span>
                       )}
@@ -335,8 +335,8 @@ export const AnalyticsDashboard: React.FC = () => {
                     <p className="text-xl sm:text-3xl font-black text-slate-900 mt-1">{card.value}</p>
                     <p className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5 truncate">{card.sub}</p>
                   </div>
-                  <div className={`p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl ${card.bg} group-hover:scale-105 transition-transform self-start sm:self-center shrink-0`}>
-                    <Icon className="w-4 h-4 sm:w-6 sm:h-6 stroke-[2.25]" />
+                  <div className={`p-2 sm:p-2.5 rounded-xl sm:rounded-2xl ${card.bg} group-hover:scale-105 transition-transform self-end sm:self-auto shrink-0 mt-1`}>
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.25]" />
                   </div>
                 </div>
               );
@@ -531,7 +531,8 @@ export const AnalyticsDashboard: React.FC = () => {
               </div>
             </div>
 
-            <div className="overflow-x-auto pt-1">
+            {/* Desktop Table View */}
+            <div className="hidden md:block overflow-x-auto pt-1">
               <table className="w-full text-left text-xs">
                 <thead>
                   <tr className="border-b border-slate-100 text-slate-400 font-bold uppercase text-[10px] tracking-wider">
@@ -613,6 +614,77 @@ export const AnalyticsDashboard: React.FC = () => {
                 </tbody>
               </table>
             </div>
+
+            {/* Mobile Card View */}
+            <div className="md:hidden space-y-3 pt-1">
+              {visitorAnalytics?.recent_sessions?.length ? (
+                visitorAnalytics.recent_sessions.map((sess, idx) => {
+                  const DeviceIcon = getDeviceIcon(sess.device_type);
+                  return (
+                    <div key={idx} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-mono text-xs font-bold text-slate-900">
+                          {sess.session_id_masked}
+                        </span>
+                        <div className="flex items-center gap-1.5">
+                          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${
+                            sess.visitor_type === 'authenticated'
+                              ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+                              : 'bg-slate-200/60 text-slate-600 border border-slate-300/60'
+                          }`}>
+                            {sess.visitor_type === 'authenticated' ? 'Member' : 'Guest'}
+                          </span>
+                          {sess.is_active ? (
+                            <span className="inline-flex items-center gap-1 text-emerald-700 font-bold text-[10px] bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                              Live
+                            </span>
+                          ) : (
+                            <span className="text-slate-400 text-[10px]">
+                              {formatSessionTime(sess.started_at)}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between text-xs text-slate-600">
+                        <span className="flex items-center gap-1.5 font-medium">
+                          <DeviceIcon className="w-3.5 h-3.5 text-slate-400" />
+                          {sess.device_type} • {sess.browser_name}
+                        </span>
+                        <span className="text-slate-700 font-bold">
+                          {formatDuration(sess.duration_seconds)}
+                          <span className="text-slate-400 font-normal text-[11px] ml-1">
+                            ({sess.heartbeat_count} pings)
+                          </span>
+                        </span>
+                      </div>
+
+                      <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between text-xs">
+                        <span className="text-[11px] text-slate-400 font-medium">Route:</span>
+                        <div className="flex items-center gap-1 truncate max-w-[200px]">
+                          <span className="font-mono text-[11px] text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-100 truncate">
+                            {sess.landing_path}
+                          </span>
+                          {sess.last_path && sess.last_path !== sess.landing_path && (
+                            <>
+                              <span className="text-slate-300">→</span>
+                              <span className="font-mono text-[11px] text-slate-600 truncate">
+                                {sess.last_path}
+                              </span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="py-8 text-center text-slate-400 text-xs">
+                  No visitor session activity recorded yet.
+                </div>
+              )}
+            </div>
           </div>
 
         </div>
@@ -627,15 +699,15 @@ export const AnalyticsDashboard: React.FC = () => {
               return (
                 <div
                   key={idx}
-                  className={`bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 shadow-xs border ${card.border} hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-2 group`}
+                  className={`bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-xs border ${card.border} hover:shadow-md transition-all flex flex-col justify-between gap-2 group`}
                 >
                   <div>
-                    <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 line-clamp-1">{card.title}</p>
+                    <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-500 leading-tight min-h-[26px] sm:min-h-0 flex-1">{card.title}</p>
                     <p className="text-xl sm:text-3xl font-black text-slate-900 mt-1">{card.value}</p>
                     <p className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5 truncate">{card.sub}</p>
                   </div>
-                  <div className={`p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl ${card.bg} group-hover:scale-105 transition-transform self-start sm:self-center shrink-0`}>
-                    <Icon className="w-4 h-4 sm:w-6 sm:h-6 stroke-[2.25]" />
+                  <div className={`p-2 sm:p-2.5 rounded-xl sm:rounded-2xl ${card.bg} group-hover:scale-105 transition-transform self-end sm:self-auto shrink-0 mt-1`}>
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.25]" />
                   </div>
                 </div>
               );

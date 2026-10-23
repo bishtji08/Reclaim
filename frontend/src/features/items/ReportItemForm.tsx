@@ -388,7 +388,7 @@ export const ReportItemForm: React.FC<ReportItemFormProps> = ({ type, onSubmit, 
       <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200/90 overflow-hidden">
         
         {/* Header with Graphic Era University Styling */}
-        <div className="p-4.5 sm:p-8 bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 text-white relative">
+        <div className="p-5 sm:p-8 bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 text-white relative">
           <div className="flex items-center justify-between">
             <div className="space-y-2">
               <span className={`inline-block px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-wider ${
@@ -410,7 +410,7 @@ export const ReportItemForm: React.FC<ReportItemFormProps> = ({ type, onSubmit, 
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-4.5 sm:p-8 space-y-6 sm:space-y-8 text-xs sm:text-sm">
+        <form onSubmit={handleSubmit} className="p-5 sm:p-8 space-y-6 sm:space-y-8 text-xs sm:text-sm">
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
@@ -508,11 +508,11 @@ export const ReportItemForm: React.FC<ReportItemFormProps> = ({ type, onSubmit, 
 
               {/* Location Picker Section */}
               <div className="space-y-3 pt-2 border-t border-slate-100">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <label className="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
                     <MapPin className="w-4 h-4 text-blue-600" /> Campus Location *
                   </label>
-                  <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200">
+                  <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200 self-start sm:self-auto">
                     <button
                       type="button"
                       onClick={() => setLocationMode('select')}

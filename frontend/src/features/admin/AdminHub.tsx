@@ -244,7 +244,7 @@ export const AdminHub: React.FC<AdminHubProps> = ({ currentUser }) => {
   return (
     <div className="p-3.5 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6 animate-in fade-in duration-200">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-gradient-to-r from-slate-900 to-indigo-950 p-4.5 sm:p-6 rounded-2xl sm:rounded-3xl text-white shadow-xl">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-5 sm:p-7 rounded-2xl sm:rounded-3xl text-white shadow-xl">
         <div>
           <div className="flex items-center gap-2 mb-2">
             <span className="px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-full text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
@@ -266,7 +266,7 @@ export const AdminHub: React.FC<AdminHubProps> = ({ currentUser }) => {
               if (activeTab === 'users') fetchUsers();
               if (activeTab === 'flags') fetchFlags();
             }}
-            className="flex items-center gap-2 px-3.5 py-2 bg-white/10 hover:bg-white/15 text-white rounded-xl text-xs font-semibold transition-all backdrop-blur-xs border border-white/10"
+            className="flex items-center gap-2 px-3.5 py-2 bg-white/10 hover:bg-white/15 text-white rounded-xl text-xs font-semibold transition-all backdrop-blur-xs border border-white/10 cursor-pointer"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} /> Refresh
           </button>
@@ -401,26 +401,26 @@ export const AdminHub: React.FC<AdminHubProps> = ({ currentUser }) => {
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h3 className="text-lg font-bold text-gray-900">User Moderation & Access Control</h3>
+              <h3 className="text-base sm:text-lg font-bold text-gray-900">User Moderation & Access Control</h3>
               <p className="text-xs text-gray-500">Search users, update permissions, or blacklist abusive accounts.</p>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="relative">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
+              <div className="relative flex-1 sm:w-60">
                 <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   placeholder="Search name or email..."
                   value={userSearch}
                   onChange={(e) => setUserSearch(e.target.value)}
-                  className="pl-9 pr-3 py-1.5 text-xs border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white"
+                  className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white"
                 />
               </div>
 
               <select
                 value={userRoleFilter}
                 onChange={(e) => setUserRoleFilter(e.target.value)}
-                className="px-3 py-1.5 text-xs border border-gray-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500"
+                className="px-3 py-2 text-xs border border-gray-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 font-semibold"
               >
                 <option value="all">All Roles</option>
                 <option value="admin">Admins</option>

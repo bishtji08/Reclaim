@@ -128,7 +128,7 @@ export const UserSettings: React.FC<UserSettingsProps> = ({ user, onProfileUpdat
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
         
         {/* Profile Card */}
-        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xs border border-slate-200/90 p-4.5 sm:p-8 flex flex-col justify-between space-y-5 sm:space-y-6">
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xs border border-slate-200/90 p-5 sm:p-8 flex flex-col justify-between space-y-5 sm:space-y-6">
           <form onSubmit={handleUpdateProfile} className="space-y-4 text-xs sm:text-sm">
             <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
               <div className="p-2.5 rounded-2xl bg-blue-50 text-blue-600">
@@ -201,7 +201,7 @@ export const UserSettings: React.FC<UserSettingsProps> = ({ user, onProfileUpdat
         </div>
 
         {/* Security / Password Card */}
-        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xs border border-slate-200/90 p-4.5 sm:p-8 flex flex-col justify-between space-y-5 sm:space-y-6">
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xs border border-slate-200/90 p-5 sm:p-8 flex flex-col justify-between space-y-5 sm:space-y-6">
           <form onSubmit={handleChangePassword} className="space-y-4 text-xs sm:text-sm">
             <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
               <div className="p-2.5 rounded-2xl bg-indigo-50 text-indigo-600">
